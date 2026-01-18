@@ -32,7 +32,7 @@ The table below illustrates how raw transaction payloads were transformed into a
 A React-based Compliance View demonstrating the real-time flagging of high-value anomalies and the "Recent Checks" audit trail.
 
 <div align="center">
-<img width="1075" height="867" alt="FinGuard Dashboard" src="https://github.com/user-attachments/assets/847be770-463e-49b4-9158-4a2d6e88be6e" />
+<img width="1075" height="867" alt="Screenshot 2026-01-17 at 9 33 51 PM" src="https://github.com/user-attachments/assets/3517ea4b-c9dc-48f0-9724-9d7f89dbd0f8" />
 </div>
 
 ## ✨ Functional Features

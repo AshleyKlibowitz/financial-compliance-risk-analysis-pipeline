@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from 'recharts'
+import { PieChart, Pie, Cell, Tooltip, Legend } from 'recharts'
 
 type TransactionRequest = {
   amount: number
@@ -389,12 +389,18 @@ export default function App() {
       const lvl = (it.risk_level || 'LOW') as 'LOW' | 'MEDIUM' | 'HIGH'
       counts[lvl] = (counts[lvl] ?? 0) + 1
     })
-    const total = Math.max(1, counts.LOW + counts.MEDIUM + counts.HIGH)
-    const data = [
+    const sum = counts.LOW + counts.MEDIUM + counts.HIGH
+    const total = sum || 1
+    let data = [
       { name: 'Low', value: counts.LOW, color: '#16a34a' },
       { name: 'Medium', value: counts.MEDIUM, color: '#f59e0b' },
       { name: 'High', value: counts.HIGH, color: '#ef4444' },
     ]
+
+    // If there are no transactions yet, show a neutral placeholder slice so the chart is visible.
+    if (sum === 0) {
+      data = [{ name: 'No transactions', value: 1, color: '#e5e7eb' }]
+    }
 
 
     return (
@@ -417,7 +423,10 @@ export default function App() {
                   <Cell key={`cell-${index}`} fill={entry.color} />
                 ))}
               </Pie>
-              <Tooltip formatter={(value: number | undefined) => value !== undefined ? `${Math.round((value / total) * 100)}%` : ''} />
+              <Tooltip formatter={(value: number | undefined) => {
+                if (sum === 0) return ''
+                return value !== undefined ? `${Math.round((value / total) * 100)}%` : ''
+              }} />
               <Legend verticalAlign="bottom" height={24} />
               </PieChart>
             </div>

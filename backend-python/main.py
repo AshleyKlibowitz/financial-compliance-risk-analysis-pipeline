@@ -1,0 +1,35 @@
+# Create a FastAPI application with a Pydantic model for a Transaction (amount, currency, merchant). Create a POST endpoint /transactions. When this endpoint is hit:
+# Send the amount to a separate service at http://risk-service:8080/risk using the httpx or requests library.
+# If the risk service returns 'high_risk', flag the transaction in the response.
+# Return the final transaction object.
+
+from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel
+import httpx
+
+app = FastAPI()
+
+
+class Transaction(BaseModel):
+    amount: float
+    currency: str
+    merchant: str
+    high_risk: bool = False
+
+
+@app.post("/transactions")
+async def create_transaction(transaction: Transaction):
+    try:
+        async with httpx.AsyncClient() as client:
+            risk_response = await client.post(
+                "http://risk-service:8080/risk",
+                json={"amount": transaction.amount},
+                timeout=5.0,
+            )
+            risk_data = risk_response.json()
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Risk service error: {e}")
+
+    if risk_data.get("status") == "high_risk":
+        transaction.high_risk = True
+    return transaction

@@ -1,0 +1,25 @@
+version: '3.8'
+services:
+  risk-service:
+    build: ./backend-go
+    ports:
+      - "8080:8080"
+    networks:
+      - finguard-net
+
+  api:
+    build: ./backend-python
+    ports:
+      - "8000:8000"
+    depends_on:
+      - risk-service
+    environment:
+      - RISK_SERVICE_URL=http://risk-service:8080/risk
+      - GOOGLE_OAUTH_CLIENT_ID=${GOOGLE_OAUTH_CLIENT_ID:-}
+      - GOOGLE_PROJECT_ID=${GOOGLE_PROJECT_ID:-}
+    networks:
+      - finguard-net
+
+networks:
+  finguard-net:
+    driver: bridge

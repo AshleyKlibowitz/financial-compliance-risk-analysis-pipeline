@@ -1,0 +1,95 @@
+:root{
+  --bg: #f8fafc;
+  --card: #ffffff;
+  --muted: #64748b;
+  --accent: #4f46e5;
+  --success: #10b981;
+  --danger: #ef4444;
+  --radius: 12px;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+.app-root{
+  min-height:100vh;
+  background:var(--bg);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:48px 16px;
+}
+.container{
+  width:100%;
+  max-width:920px;
+}
+.card{
+  background:var(--card);
+  border-radius:var(--radius);
+  box-shadow:0 6px 18px rgba(15,23,42,0.06);
+  padding:28px;
+  border:1px solid rgba(15,23,42,0.04);
+}
+.brand h1{font-size:28px;margin:0 0 6px 0;font-weight:700;color:#0f172a}
+.brand p{margin:0;color:var(--muted)}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:end}
+label{display:block;font-size:13px;color:#0f172a}
+input[type="text"],input[type="number"]{
+  width:100%;padding:10px 12px;border:1px solid rgba(15,23,42,0.08);border-radius:8px;margin-top:6px;font-size:15px;
+}
+.actions{display:flex;justify-content:space-between;align-items:center;margin-top:12px}
+.btn{
+  background:var(--accent);color:white;padding:10px 14px;border-radius:8px;border:none;cursor:pointer;font-weight:600;
+}
+.btn:disabled{opacity:0.6;cursor:not-allowed}
+.meta{color:var(--muted);font-size:13px}
+.alert{margin-top:14px;padding:12px;border-radius:8px}
+.alert.error{background: #fee2e2;color:var(--danger);border:1px solid rgba(239,68,68,0.08)}
+.result{margin-top:16px;padding:14px;border-radius:10px;border:1px solid rgba(15,23,42,0.04);display:flex;justify-content:space-between;align-items:center}
+.tag{padding:6px 10px;border-radius:999px;color:white;font-weight:700;font-size:12px}
+.tag.high{background:var(--danger)}
+.tag.low{background:var(--success)}
+
+@media (max-width:640px){
+  .form-grid{grid-template-columns:1fr}
+}
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
